@@ -98,6 +98,20 @@ export default function App() {
   })
 
   const update = (key, value) => setMetrics(prev => ({ ...prev, [key]: value }))
+
+  const fillTestData = () => {
+    setIndustry('E-Commerce')
+    setMetrics({
+      openRate: '22.0',
+      ctr: '2.8',
+      ctor: '',
+      unsubRate: '0.18',
+      bounceRate: '0.35',
+      listSize: '10000',
+      emailsSent: '9800',
+    })
+  }
+
   const benchmark = INDUSTRIES[industry]
 
   const hasInput = Object.values(metrics).some(v => v !== '')
@@ -129,6 +143,16 @@ export default function App() {
           <div className="inline-flex items-center px-4 py-2 border border-turtle text-turtle rounded-full text-sm font-medium mb-6">Free Tool</div>
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Email Metrics Calculator</h1>
           <p className="text-cloudy text-lg max-w-2xl mx-auto">Enter your email campaign metrics and benchmark them against {Object.keys(INDUSTRIES).length} industry averages — with actionable recommendations.</p>
+        </div>
+
+        <div className="flex justify-end mb-4">
+          <button
+            type="button"
+            onClick={fillTestData}
+            className="px-3 py-1.5 text-xs font-mono bg-prince/20 text-prince border border-prince/30 rounded hover:bg-prince/30 transition-colors focus:outline-none focus:ring-2 focus:ring-prince focus:ring-offset-2 focus:ring-offset-abyss"
+          >
+            Fill Test Data
+          </button>
         </div>
 
         {/* Industry Selector */}
