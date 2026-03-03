@@ -174,8 +174,8 @@ export default function App() {
               ['bounceRate', 'Bounce Rate (%)', '0.4'],
               ['listSize', 'List Size', '5000'],
               ['emailsSent', 'Emails Sent', '4800'],
-            ].map(([key, label, placeholder]) => (
-              <div key={key}>
+            ].map(([key, label, placeholder], index) => (
+              <div key={key} className="animate-slideUp" style={{ animationDelay: `${index * 0.08}s` }}>
                 <label className="text-xs text-galactic block mb-1">{label}</label>
                 <input type="number" step="any" value={metrics[key]} onChange={(e) => update(key, e.target.value)} placeholder={placeholder} className="w-full bg-midnight border border-metal/30 rounded-lg px-3 py-2.5 text-white placeholder-galactic focus:outline-none focus:border-azure transition-colors" />
               </div>
@@ -190,7 +190,7 @@ export default function App() {
         {hasInput && (
           <div className="space-y-4">
             <h2 className="text-lg font-semibold text-white">Benchmark Results — {industry}</h2>
-            {metricConfigs.map(({ key, label, unit, benchKey, desc, formula, computed }) => {
+            {metricConfigs.map(({ key, label, unit, benchKey, desc, formula, computed }, index) => {
               const userVal = key === 'ctor' && computed ? parseFloat(computed) : parseFloat(metrics[key])
               if (isNaN(userVal)) return null
               const benchVal = benchmark[benchKey]
@@ -200,7 +200,7 @@ export default function App() {
               const inverse = ['unsubRate', 'bounceRate'].includes(benchKey)
 
               return (
-                <div key={key} className="card-gradient border border-metal/20 rounded-2xl p-5">
+                <div key={key} className="card-gradient border border-metal/20 rounded-2xl p-5 animate-slideUp" style={{ animationDelay: `${index * 0.08}s` }}>
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                     <div>
                       <h3 className="font-semibold text-white">{label}</h3>
@@ -273,7 +273,7 @@ export default function App() {
       </div>
 
       <footer className="border-t border-metal/30 mt-16">
-        <div className="max-w-6xl mx-auto px-4 py-6 text-center text-sm text-galactic">
+        <div className="max-w-[1600px] mx-auto px-4 py-6 text-center text-sm text-galactic">
           Free marketing tools by <a href="https://www.dreamhost.com" target="_blank" rel="noopener" className="text-azure hover:text-white transition-colors">DreamHost</a>
         </div>
       </footer>
